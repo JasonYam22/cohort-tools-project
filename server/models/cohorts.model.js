@@ -1,13 +1,11 @@
 // ./models/Book.model.js
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
+const { Schema, model } = require("mongoose");
 // CREATE SCHEMA
 // Schema - describes and enforces the structure of the documents
 const cohortSchema = new Schema({
   inProgress: { type: Boolean },
-  cohortSlug: { type: Mixed },
-  cohortName: { type: Mixed },
+  cohortSlug: { type: String },
+  cohortName: { type: String },
   program: { type: String },
   campus: { type: String },
   startDate: { type: Date },
@@ -21,7 +19,6 @@ const cohortSchema = new Schema({
 // The model() method defines a model (Book) and creates a collection (books) in MongoDB
 // The collection name will default to the lowercased, plural form of the model name:
 //                          "Book" --> "books"
-const Cohort = mongoose.model("Cohort", cohortSchema);
 
 // EXPORT THE MODEL
-module.exports = Cohort;
+module.exports = model("Cohort", cohortSchema);

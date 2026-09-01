@@ -1,12 +1,8 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
-
+const { Schema, model } = require("mongoose");
 // CREATE STUDENT SCHEMA
 const studentSchema = new Schema(
   {
-     "_id": {
-    "$oid": ObjectId ("")
-  },
+
   firstName: {type: String},
   lastName: {type: String},
   email: {type: String},
@@ -22,10 +18,10 @@ const studentSchema = new Schema(
     default: 'images/default-avatar.png'},
   projects: [],
   cohort: {
-    $oid: ObjectId ("")
+  type: Schema.Types.ObjectId, ref: "Cohort"
   }
   })
 
-const Student = mongoose.model("Student", studentSchema);
 
-module.exports = Student;
+
+module.exports = model("Student", studentSchema);

@@ -13,12 +13,12 @@ const PORT = 5005;
 // INITIALIZE EXPRESS APP - https://expressjs.com/en/4x/api.html#express
 const app = express();
 
-const Cohort = require("./models/cohorts.model")
-const Student = require("./models/student.model")
+const Cohort = require("./models/cohorts.model.js")
+const Student = require("./models/students.model.js")
 
 const mongoose = require("mongoose");
 mongoose
-  .connect("mongodb://127.0.0.1:27017/cohorts-tools-api")
+  .connect("mongodb://127.0.0.1:27017/cohort-tools-api")
   .then(x => console.log(`Connected to Database: "${x.connections[0].name}"`))
   .catch(err => console.error("Error connecting to MongoDB", err));
 
@@ -49,12 +49,12 @@ app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
 });
 
-const cohorts = require("../cohorts.json")
+const cohorts = require("./models/cohorts.model.js")
 app.get("/api/cohorts", (req, res) => {
   res.json(cohorts)
 })
 
-const students = require("../students.json")
+const students = require("./models/students.model.js")
 app.get("/api/students", (req, res) => {
   res.json(students)
 })
