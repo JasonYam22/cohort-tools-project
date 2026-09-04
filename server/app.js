@@ -20,8 +20,15 @@ app.get("/docs", (req, res) => {
 const indexRouter = require("./routes/index.routes.js")
 app.use("/api", indexRouter)
 
+// Import the custom error handling middleware:
+const { errorHandler, notFoundHandler } = require('../middleware-error/error.handling');
+
+// Set up custom error handling middleware:
+app.use(notFoundHandler);
+app.use(errorHandler);
+
 // server listen & PORT
-const PORT = process.env.PORT || 5005
+const PORT = process.env.PORT || 5006
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
