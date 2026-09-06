@@ -6,11 +6,21 @@ try {
 
 const express = require("express");
 const app = express();
+const helmet = require("helmet")
+const applyConfigs = require("./config/index.js")
+applyConfigs(app)
+const rateLimit = require("express-rate-limit")
+
+const limiter = rateLimiter({
+  windowMs: 30 * 60 * 1000, // 30 minutes
+  max: 30
+})
+
+app.use(limiter)
+app.use(helmet())
 
 require("./db/index.js")  // automatically looks for a file called index inside the folder.
 
-const applyConfigs = require("./config/index.js")
-applyConfigs(app)
 
 app.get("/docs", (req, res) => {
   res.sendFile(__dirname + "/views/docs.html");
