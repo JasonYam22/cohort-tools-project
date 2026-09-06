@@ -21,7 +21,7 @@ const indexRouter = require("./routes/index.routes.js")
 app.use("/api", indexRouter)
 
 // Import the custom error handling middleware:
-const { errorHandler, notFoundHandler } = require('../middleware-error/error.handling');
+const { errorHandler, notFoundHandler } = require('./middlewares/error.handling');
 
 // Set up custom error handling middleware:
 app.use(notFoundHandler);
